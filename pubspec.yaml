@@ -88,3 +88,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: IBM_Plex_Sans_KR
+      fonts:
+        - asset: assets/fonts/IBMPlexSansKR-Medium.ttf

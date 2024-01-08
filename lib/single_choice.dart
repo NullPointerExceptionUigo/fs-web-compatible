@@ -20,11 +20,11 @@ class _SingleChoiceState extends State<SingleChoice> {
       segments: const <ButtonSegment<AttendedType>>[
         ButtonSegment<AttendedType>(
             value: AttendedType.attended,
-            label: Text('입실'),
+            label: Text('입실', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             icon: Icon(Icons.login, size: 16)),
         ButtonSegment<AttendedType>(
             value: AttendedType.leave,
-            label: Text('퇴실'),
+            label: Text('퇴실', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             icon: Icon(Icons.logout, size: 16)),
       ],
       selected: <AttendedType>{attendedType},

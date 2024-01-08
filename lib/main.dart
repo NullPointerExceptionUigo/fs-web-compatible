@@ -46,7 +46,7 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(fontFamily: "IBM_Plex_Sans_KR"),
+        // theme: ThemeData(fontFamily: "IBM_Plex_Sans_KR"),
         home: Scaffold(
             body: Container(
                 margin: const EdgeInsets.fromLTRB(0, 250, 0, 0),
