@@ -30,9 +30,6 @@ class _SingleChoiceState extends State<SingleChoice> {
       selected: <AttendedType>{attendedType},
       onSelectionChanged: (Set<AttendedType> newSelection) {
         setState(() {
-          // By default there is only a single segment that can be
-          // selected at one time, so its value is always the first
-          // item in the selected set.
           attendedType = newSelection.first;
         });
       },
