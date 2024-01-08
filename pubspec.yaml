@@ -30,8 +30,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  timer_builder: ^2.0.0
-  date_format: ^2.0.7
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -90,4 +88,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-
+  fonts:
+    - family: IBM_Plex_Sans_KR
+      fonts:
+        - asset: assets/fonts/IBMPlexSansKR-Medium.ttf
