@@ -1,5 +1,7 @@
 // public imports
 import 'package:flutter/material.dart';
+import 'package:timer_builder/timer_builder.dart';
+import 'package:date_format/date_format.dart';
 
 // local imports
 import 'package:auto_study_management/single_choice.dart';
@@ -49,10 +51,23 @@ class HomeState extends State<Home> {
         theme: ThemeData(fontFamily: "IBM_Plex_Sans_KR"),
         home: Scaffold(
             body: Container(
-                margin: const EdgeInsets.fromLTRB(0, 250, 0, 0),
+                margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Container(
+                        alignment: Alignment.topLeft,
+                          margin: const EdgeInsets.fromLTRB(50, 20, 0, 50),
+
+                          child: TimerBuilder.periodic(const Duration(seconds: 1),
+                          builder: (context) {
+                            return Text(
+                                formatDate(DateTime.now(), [HH, ':', nn, ':', ss]),
+                                style: const TextStyle(fontSize: 48, fontFamily: "IBM_Plex_Sans_KR"),
+                                textAlign: TextAlign.left);
+                          }))
+                      ,
+
                       SizedBox(
                           width: 300,
                           height: 100,
@@ -68,8 +83,6 @@ class HomeState extends State<Home> {
                           ],
                         ),
                       ),
-
-
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -237,3 +250,5 @@ class HomeState extends State<Home> {
                     ]))));
   }
 }
+
+
