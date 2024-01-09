@@ -1,10 +1,10 @@
 // public imports
 import 'package:flutter/material.dart';
-import 'package:timer_builder/timer_builder.dart';
-import 'package:date_format/date_format.dart';
+
 
 // local imports
 import 'package:auto_study_management/attend_choice.dart';
+import 'package:auto_study_management/clock.dart' as clock;
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: Home());
+    return const MaterialApp(
+        home: Scaffold(
+            appBar: clock.Clock(),
+            body: Home()
+            )
+        );
   }
 }
 
@@ -59,19 +64,6 @@ class HomeState extends State<Home> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        alignment: Alignment.topLeft,
-                          margin: const EdgeInsets.fromLTRB(50, 20, 0, 50),
-
-                          child: TimerBuilder.periodic(const Duration(seconds: 1),
-                          builder: (context) {
-                            return Text(
-                                formatDate(DateTime.now(), [HH, ':', nn, ':', ss]),
-                                style: const TextStyle(fontSize: 48, fontFamily: "IBM_Plex_Sans_KR"),
-                                textAlign: TextAlign.left);
-                          }))
-                      ,
-
                       SizedBox(
                           width: 300,
                           height: 100,
@@ -261,5 +253,3 @@ class HomeState extends State<Home> {
                     ]))));
   }
 }
-
-
