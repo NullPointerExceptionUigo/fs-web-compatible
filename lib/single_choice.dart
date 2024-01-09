@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 
-enum AttendedType { attended, leave }
+enum AttendType { enter, leave }
 
-class SingleChoice extends StatefulWidget {
-  const SingleChoice({super.key, required this.studNum});
+class AttendChoice extends StatefulWidget {
+  const AttendChoice({super.key, required this.studNum});
 
   final String studNum;
 
   @override
-  State<SingleChoice> createState() => _SingleChoiceState();
+  State<AttendChoice> createState() => _AttendChoiceState();
 }
 
-class _SingleChoiceState extends State<SingleChoice> {
-  AttendedType attendedType = AttendedType.attended;
+class _AttendChoiceState extends State<AttendChoice> {
+  AttendType attendedType = AttendType.enter;
 
   @override
   Widget build(BuildContext context) {
-    return SegmentedButton<AttendedType>(
-      segments: const <ButtonSegment<AttendedType>>[
-        ButtonSegment<AttendedType>(
-            value: AttendedType.attended,
+    return SegmentedButton<AttendType>(
+      segments: const <ButtonSegment<AttendType>>[
+        ButtonSegment<AttendType>(
+            value: AttendType.enter,
             label: Text('입실', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             icon: Icon(Icons.login, size: 16)),
-        ButtonSegment<AttendedType>(
-            value: AttendedType.leave,
+        ButtonSegment<AttendType>(
+            value: AttendType.leave,
             label: Text('퇴실', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             icon: Icon(Icons.logout, size: 16)),
       ],
-      selected: <AttendedType>{attendedType},
-      onSelectionChanged: (Set<AttendedType> newSelection) {
+      selected: <AttendType>{attendedType},
+      onSelectionChanged: (Set<AttendType> newSelection) {
         setState(() {
           attendedType = newSelection.first;
         });

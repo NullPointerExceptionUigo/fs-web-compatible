@@ -47,8 +47,12 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    const double buttonContentSize = 24;
+
+    const double buttonWidth = 80;
+    const double buttonHeight = 80;
+
     return MaterialApp(
-        // theme: ThemeData(fontFamily: "IBM_Plex_Sans_KR"),
         home: Scaffold(
             body: Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -79,7 +83,14 @@ class HomeState extends State<Home> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SingleChoice(studNum: studNum),
+                            AttendChoice(studNum: studNum),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: FilledButton(
+                                onPressed: () {},
+                                child: const Icon(Icons.send, size: 16,),
+                              ),
+                            )
                           ],
                         ),
                       ),
@@ -89,38 +100,38 @@ class HomeState extends State<Home> {
                             Padding(
                               padding: const EdgeInsets.all(5),
                               child: SizedBox(
-                                  width: 100,
-                                  height: 100,
-                                  child: ElevatedButton(
+                                  width: buttonWidth,
+                                  height: buttonHeight,
+                                  child: OutlinedButton(
                                       onPressed: () {
                                         appendNum("1");
                                       },
                                       child: const Text('1',
-                                          style: TextStyle(fontSize: 32)))),
+                                          style: TextStyle(fontSize: buttonContentSize)))),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(5),
                               child: SizedBox(
-                                  width: 100,
-                                  height: 100,
-                                  child: ElevatedButton(
+                                  width: buttonWidth,
+                                  height: buttonHeight,
+                                  child: OutlinedButton(
                                       onPressed: () {
                                         appendNum("2");
                                       },
                                       child: const Text('2',
-                                          style: TextStyle(fontSize: 32)))),
+                                          style: TextStyle(fontSize: buttonContentSize)))),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(5),
                               child: SizedBox(
-                                  width: 100,
-                                  height: 100,
-                                  child: ElevatedButton(
+                                  width: buttonWidth,
+                                  height: buttonHeight,
+                                  child: OutlinedButton(
                                       onPressed: () {
                                         appendNum("3");
                                       },
                                       child: const Text('3',
-                                          style: TextStyle(fontSize: 32)))),
+                                          style: TextStyle(fontSize: buttonContentSize)))),
                             ),
                           ]),
                       Row(
@@ -129,38 +140,38 @@ class HomeState extends State<Home> {
                             Padding(
                               padding: const EdgeInsets.all(5),
                               child: SizedBox(
-                                  width: 100,
-                                  height: 100,
-                                  child: ElevatedButton(
+                                  width: buttonWidth,
+                                  height: buttonHeight,
+                                  child: OutlinedButton(
                                       onPressed: () {
                                         appendNum("4");
                                       },
                                       child: const Text('4',
-                                          style: TextStyle(fontSize: 32)))),
+                                          style: TextStyle(fontSize: buttonContentSize)))),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(5),
                               child: SizedBox(
-                                  width: 100,
-                                  height: 100,
-                                  child: ElevatedButton(
+                                  width: buttonWidth,
+                                  height: buttonHeight,
+                                  child: OutlinedButton(
                                       onPressed: () {
                                         appendNum("5");
                                       },
                                       child: const Text('5',
-                                          style: TextStyle(fontSize: 32)))),
+                                          style: TextStyle(fontSize: buttonContentSize)))),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(5),
                               child: SizedBox(
-                                  width: 100,
-                                  height: 100,
-                                  child: ElevatedButton(
+                                  width: buttonWidth,
+                                  height: buttonHeight,
+                                  child: OutlinedButton(
                                       onPressed: () {
                                         appendNum("6");
                                       },
                                       child: const Text('6',
-                                          style: TextStyle(fontSize: 32)))),
+                                          style: TextStyle(fontSize: buttonContentSize)))),
                             ),
                           ]),
                       Row(
@@ -169,38 +180,38 @@ class HomeState extends State<Home> {
                             Padding(
                               padding: const EdgeInsets.all(5),
                               child: SizedBox(
-                                  width: 100,
-                                  height: 100,
-                                  child: ElevatedButton(
+                                  width: buttonWidth,
+                                  height: buttonHeight,
+                                  child: OutlinedButton(
                                       onPressed: () {
                                         appendNum("7");
                                       },
                                       child: const Text('7',
-                                          style: TextStyle(fontSize: 32)))),
+                                          style: TextStyle(fontSize: buttonContentSize)))),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(5),
                               child: SizedBox(
-                                  width: 100,
-                                  height: 100,
-                                  child: ElevatedButton(
+                                  width: buttonWidth,
+                                  height: buttonHeight,
+                                  child: OutlinedButton(
                                       onPressed: () {
                                         appendNum("8");
                                       },
                                       child: const Text('8',
-                                          style: TextStyle(fontSize: 32)))),
+                                          style: TextStyle(fontSize: buttonContentSize)))),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(5),
                               child: SizedBox(
-                                  width: 100,
-                                  height: 100,
-                                  child: ElevatedButton(
+                                  width: buttonWidth,
+                                  height: buttonHeight,
+                                  child: OutlinedButton(
                                       onPressed: () {
                                         appendNum("9");
                                       },
                                       child: const Text('9',
-                                          style: TextStyle(fontSize: 32)))),
+                                          style: TextStyle(fontSize: buttonContentSize)))),
                             ),
                           ]),
                       Row(
@@ -209,41 +220,41 @@ class HomeState extends State<Home> {
                             Padding(
                               padding: const EdgeInsets.all(5),
                               child: SizedBox(
-                                  width: 100,
-                                  height: 100,
-                                  child: ElevatedButton(
+                                  width: buttonWidth,
+                                  height: buttonHeight,
+                                  child: OutlinedButton(
                                       onPressed: () {
                                         setState(() {
                                           studNum = "";
                                         });
                                       },
                                       child:
-                                          const Icon(Icons.close, size: 32))),
+                                          const Icon(Icons.close, size: buttonContentSize))),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(5),
                               child: SizedBox(
-                                  width: 100,
-                                  height: 100,
-                                  child: ElevatedButton(
+                                  width: buttonWidth,
+                                  height: buttonHeight,
+                                  child: OutlinedButton(
                                       onPressed: () {
                                         appendNum("0");
                                       },
                                       child: const Text('0',
-                                          style: TextStyle(fontSize: 32)))),
+                                          style: TextStyle(fontSize: buttonContentSize)))),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(5),
                               child: SizedBox(
-                                  width: 100,
-                                  height: 100,
-                                  child: ElevatedButton(
+                                  width: buttonWidth,
+                                  height: buttonHeight,
+                                  child: OutlinedButton(
                                       onPressed: () {
                                         removeNum();
                                       },
                                       child: const Icon(
                                         Icons.arrow_back,
-                                        size: 32,
+                                        size: buttonContentSize,
                                       ))),
                             ),
                           ]),
