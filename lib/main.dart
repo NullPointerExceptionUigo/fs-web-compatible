@@ -1,10 +1,13 @@
 // public imports
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
 
 // local imports
 import 'package:auto_study_management/attend_choice.dart';
 import 'package:auto_study_management/clock.dart' as clock;
+
+String studNum = "";
 
 void main() {
   runApp(const MyApp());
@@ -32,7 +35,6 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
-  String studNum = "";
 
   void appendNum(String num) {
     if (studNum.length >= 5) return;
@@ -79,7 +81,7 @@ class HomeState extends State<Home> {
                             Padding(
                               padding: const EdgeInsets.only(left: 10),
                               child: FilledButton(
-                                onPressed: () {},
+                                onPressed: () {send(studNum, AttendChoiceState().attendedType.toString());},
                                 child: const Icon(Icons.send, size: 16,),
                               ),
                             )
@@ -252,4 +254,12 @@ class HomeState extends State<Home> {
                           ]),
                     ]))));
   }
+}
+
+Future<void> send(String studNum,  String attendType) async {
+  attendType = attendType.substring(11);
+  http.Response response = await http.post(
+    Uri.parse('http://home.bainble.kr:9056/$attendType/$studNum'),
+  );
+    print("---------------------------------${response.body} $attendType $studNum----------------------------------");
 }
