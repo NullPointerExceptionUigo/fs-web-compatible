@@ -4,7 +4,7 @@ import 'package:timer_builder/timer_builder.dart';
 import 'package:date_format/date_format.dart';
 
 // local imports
-import 'package:auto_study_management/single_choice.dart';
+import 'package:auto_study_management/attend_choice.dart';
 
 void main() {
   runApp(const MyApp());
