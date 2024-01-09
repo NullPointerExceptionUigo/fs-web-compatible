@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 enum AttendType { attend, unattend }
 
+AttendType attendedType = AttendType.attend;
+
 class AttendChoice extends StatefulWidget {
   const AttendChoice({super.key, required this.studNum});
 
@@ -12,7 +14,6 @@ class AttendChoice extends StatefulWidget {
 }
 
 class AttendChoiceState extends State<AttendChoice> {
-  AttendType attendedType = AttendType.attend;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +31,12 @@ class AttendChoiceState extends State<AttendChoice> {
       selected: <AttendType>{attendedType},
       onSelectionChanged: (Set<AttendType> newSelection) {
         setState(() {
+          print("바뀜");
           attendedType = newSelection.first;
-        });
+          print(newSelection.first);
+          print(attendedType);
+        }
+        );
       },
     );
   }

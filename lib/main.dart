@@ -81,7 +81,7 @@ class HomeState extends State<Home> {
                             Padding(
                               padding: const EdgeInsets.only(left: 10),
                               child: FilledButton(
-                                onPressed: () {send(studNum, AttendChoiceState().attendedType.toString());},
+                                onPressed: () {send(studNum,attendedType.toString() );},
                                 child: const Icon(Icons.send, size: 16,),
                               ),
                             )
@@ -256,10 +256,22 @@ class HomeState extends State<Home> {
   }
 }
 
-Future<void> send(String studNum,  String attendType) async {
+//비동기
+/*
+Future<void> send(String studNum, String attendType) async {
   attendType = attendType.substring(11);
   http.Response response = await http.post(
     Uri.parse('http://home.bainble.kr:9056/$attendType/$studNum'),
   );
     print("---------------------------------${response.body} $attendType $studNum----------------------------------");
+}
+*/
+//동기
+void send(String studNum, String attendType){
+  attendType = attendType.substring(11);
+  http.post(
+    Uri.parse('http://home.bainble.kr:9056/$attendType/$studNum'),
+  ).then((response) {
+    print("---------------------------------${response.body} $attendType $studNum----------------------------------");
+  });
 }
