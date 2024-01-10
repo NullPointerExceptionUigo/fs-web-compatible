@@ -1,4 +1,6 @@
 // public imports
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -8,6 +10,12 @@ import 'package:auto_study_management/attend_choice.dart';
 import 'package:auto_study_management/clock.dart' as clock;
 
 String studNum = "";
+
+var Response;
+
+const String undefinedStud = "등록되지 않은 학생입니다";
+const String alreadyAttend = "이미 입실처리 되었습니다";
+const String alreadyUnattend = "이미 퇴실처리 되었습니다";
 
 void main() {
   runApp(const MyApp());
@@ -59,6 +67,63 @@ class HomeState extends State<Home> {
     const double buttonWidth = 80;
     const double buttonHeight = 80;
 
+    //동기
+    void send(String studNum, String attendType){
+      attendType = attendType.substring(11);
+
+      http.post(
+        Uri.parse('http://home.bainble.kr:9056/$attendType/$studNum'),
+      ).then((response) {
+
+
+        Map<String, dynamic> result = jsonDecode(response.body);
+        int Result = result["message"];
+
+        print(result["message"]);
+        print("---------------------------------${response.body} $attendType $studNum----------------------------------");
+
+        Response = Result;
+
+        if (Response == 601) {
+          print(Response);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(undefinedStud),
+            ),
+          );
+        }
+        else if (Response == 602) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(alreadyAttend),
+            ),
+          );
+        }
+        else if (Response == 603) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(alreadyUnattend),
+            ),
+          );
+        }
+        else {
+          print(Response);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text("무슨 에러일까요? 이 메세지가 보인다면 담당자에게 문의해주세요!"),
+                duration: Duration(seconds: 1)
+            ),
+          );
+        }
+
+      });
+
+    }
+
+    void showSnackBar() {
+
+    }
+
     return MaterialApp(
         home: Scaffold(
             body: Container(
@@ -81,7 +146,7 @@ class HomeState extends State<Home> {
                             Padding(
                               padding: const EdgeInsets.only(left: 10),
                               child: FilledButton(
-                                onPressed: () {send(studNum,attendedType.toString() );},
+                                onPressed: () {send(studNum,attendedType.toString());},
                                 child: const Icon(Icons.send, size: 16,),
                               ),
                             )
@@ -269,9 +334,18 @@ Future<void> send(String studNum, String attendType) async {
 //동기
 void send(String studNum, String attendType){
   attendType = attendType.substring(11);
+
   http.post(
     Uri.parse('http://home.bainble.kr:9056/$attendType/$studNum'),
   ).then((response) {
+
+
+    Map<String, dynamic> result = jsonDecode(response.body);
+    int Result = result["message"];
+    print(result["message"]);
+
     print("---------------------------------${response.body} $attendType $studNum----------------------------------");
+
+    return Response = Result;
   });
 }
