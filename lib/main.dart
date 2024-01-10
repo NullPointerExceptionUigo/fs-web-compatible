@@ -11,11 +11,9 @@ import 'package:auto_study_management/clock.dart' as clock;
 
 String studNum = "";
 
-var Response;
-
-const String undefinedStud = "등록되지 않은 학생입니다";
-const String alreadyAttend = "이미 입실처리 되었습니다";
-const String alreadyUnattend = "이미 퇴실처리 되었습니다";
+const String undefinedStudent = "등록되지 않은 학생입니다";
+const String alreadyEnter = "이미 입실처리 되었습니다";
+const String alreadyLeave = "이미 퇴실처리 되었습니다";
 
 void main() {
   runApp(const MyApp());
@@ -68,56 +66,55 @@ class HomeState extends State<Home> {
     const double buttonHeight = 80;
 
     //동기
-    void send(String studNum, String attendType){
-      attendType = attendType.substring(11);
-
+    void send(String studNum, AttendType attendType) {
       http.post(
-        Uri.parse('http://home.bainble.kr:9056/$attendType/$studNum'),
+        Uri.parse('http://home.bainble.kr:9056/${attendType.toString()}/$studNum'),
       ).then((response) {
+        int statusCode = response.statusCode;
 
-
-        Map<String, dynamic> result = jsonDecode(response.body);
-        int Result = result["message"];
-
-        print(result["message"]);
-        print("---------------------------------${response.body} $attendType $studNum----------------------------------");
-
-        Response = Result;
-
-        if (Response == 601) {
-          print(Response);
+        if (statusCode == 200) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text(undefinedStud),
+              content: Text("정상적으로 처리되었습니다."),
             ),
           );
-        }
-        else if (Response == 602) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(alreadyAttend),
-            ),
-          );
-        }
-        else if (Response == 603) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(alreadyUnattend),
-            ),
-          );
-        }
-        else {
-          print(Response);
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-                content: Text("무슨 에러일까요? 이 메세지가 보인다면 담당자에게 문의해주세요!"),
-                duration: Duration(seconds: 1)
-            ),
-          );
+          return;
         }
 
+        if (statusCode == 601) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(undefinedStudent),
+            ),
+          );
+          return;
+        }
+
+        if (statusCode == 602) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(alreadyEnter),
+            ),
+          );
+          return;
+        }
+
+        if (statusCode == 603) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(alreadyLeave),
+            ),
+          );
+          return;
+        }
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text("예기치 않은 오류가 발생했습니다. (개발자 연락처: 010-8687-9536)"),
+              duration: Duration(seconds: 1)
+          ),
+        );
       });
-
     }
 
     void showSnackBar() {
@@ -146,7 +143,7 @@ class HomeState extends State<Home> {
                             Padding(
                               padding: const EdgeInsets.only(left: 10),
                               child: FilledButton(
-                                onPressed: () {send(studNum,attendedType.toString());},
+                                onPressed: () {send(studNum, attendedType);},
                                 child: const Icon(Icons.send, size: 16,),
                               ),
                             )
@@ -346,6 +343,6 @@ void send(String studNum, String attendType){
 
     print("---------------------------------${response.body} $attendType $studNum----------------------------------");
 
-    return Response = Result;
+    return response = Result;
   });
 }

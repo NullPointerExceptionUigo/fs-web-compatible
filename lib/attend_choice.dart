@@ -14,29 +14,26 @@ class AttendChoice extends StatefulWidget {
 }
 
 class AttendChoiceState extends State<AttendChoice> {
-
   @override
   Widget build(BuildContext context) {
     return SegmentedButton<AttendType>(
       segments: const <ButtonSegment<AttendType>>[
         ButtonSegment<AttendType>(
             value: AttendType.attend,
-            label: Text('입실', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            label: Text('입실',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             icon: Icon(Icons.login, size: 16)),
         ButtonSegment<AttendType>(
             value: AttendType.unattend,
-            label: Text('퇴실', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            label: Text('퇴실',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             icon: Icon(Icons.logout, size: 16)),
       ],
       selected: <AttendType>{attendedType},
       onSelectionChanged: (Set<AttendType> newSelection) {
         setState(() {
-          print("바뀜");
           attendedType = newSelection.first;
-          print(newSelection.first);
-          print(attendedType);
-        }
-        );
+        });
       },
     );
   }
