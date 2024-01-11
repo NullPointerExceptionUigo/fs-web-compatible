@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-enum AttendType { attend, unattend }
+enum AttendType { enter, leave }
 
-AttendType attendedType = AttendType.attend;
+AttendType attendedType = AttendType.enter;
 
 class AttendChoice extends StatefulWidget {
   const AttendChoice({super.key, required this.studNum});
@@ -19,12 +19,12 @@ class AttendChoiceState extends State<AttendChoice> {
     return SegmentedButton<AttendType>(
       segments: const <ButtonSegment<AttendType>>[
         ButtonSegment<AttendType>(
-            value: AttendType.attend,
+            value: AttendType.enter,
             label: Text('입실',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             icon: Icon(Icons.login, size: 16)),
         ButtonSegment<AttendType>(
-            value: AttendType.unattend,
+            value: AttendType.leave,
             label: Text('퇴실',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             icon: Icon(Icons.logout, size: 16)),

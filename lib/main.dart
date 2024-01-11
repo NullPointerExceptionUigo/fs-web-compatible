@@ -1,7 +1,7 @@
 // public imports
 import 'dart:convert';
+import 'dart:core';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -70,48 +70,14 @@ class HomeState extends State<Home> {
       http.post(
         Uri.parse('http://home.bainble.kr:9056/${attendType.toString()}/$studNum'),
       ).then((response) {
-        int statusCode = response.statusCode;
 
-        if (statusCode == 200) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("정상적으로 처리되었습니다."),
-            ),
-          );
-          return;
-        }
-
-        if (statusCode == 601) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(undefinedStudent),
-            ),
-          );
-          return;
-        }
-
-        if (statusCode == 602) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(alreadyEnter),
-            ),
-          );
-          return;
-        }
-
-        if (statusCode == 603) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(alreadyLeave),
-            ),
-          );
-          return;
-        }
+        Map<String, dynamic> result = jsonDecode(response.body);
+        String message = result["message"];
+        print(message);
 
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text("예기치 않은 오류가 발생했습니다. (개발자 연락처: 010-8687-9536)"),
-              duration: Duration(seconds: 1)
+           SnackBar(
+            content: Text(message),
           ),
         );
       });
@@ -329,6 +295,7 @@ Future<void> send(String studNum, String attendType) async {
 }
 */
 //동기
+/*
 void send(String studNum, String attendType){
   attendType = attendType.substring(11);
 
@@ -338,11 +305,11 @@ void send(String studNum, String attendType){
 
 
     Map<String, dynamic> result = jsonDecode(response.body);
-    int Result = result["message"];
+    int message = result["message"];
     print(result["message"]);
 
     print("---------------------------------${response.body} $attendType $studNum----------------------------------");
 
-    return response = Result;
   });
 }
+*/
