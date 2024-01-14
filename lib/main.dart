@@ -68,25 +68,51 @@ class HomeState extends State<Home> {
     //동기
     void send(String studNum, AttendType attendType) {
       http.post(
-        Uri.parse('http://home.bainble.kr:9056/${attendType.toString()}/$studNum'),
+        Uri.parse('http://home.bainble.kr:9056/${attendType.toString().substring(11)}/$studNum'),
       ).then((response) {
-
         Map<String, dynamic> result = jsonDecode(response.body);
-        String message = result["message"];
+        int message = response.statusCode;
         print(message);
-
-        ScaffoldMessenger.of(context).showSnackBar(
-           SnackBar(
-            content: Text(message),
-          ),
-        );
+        if (message == 200){
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("처리 되었습니다"),
+              ));
+        }
+        if (message == 601){
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(undefinedStudent),
+              ));
+        }
+        if (message == 602){
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(alreadyEnter),
+              ));
+        }
+        if (message == 603){
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(alreadyLeave),
+              ));
+        }
+        // if(message != null){
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //     SnackBar(
+        //       content: Text(),
+        //     ),
+        //   );
+        // }
+        // if (message == null){
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //       SnackBar(
+        //         content: Text("예기치 못한 오류"),
+        //       ));
+        // };
       });
     }
-
-    void showSnackBar() {
-
-    }
-
+    
     return MaterialApp(
         home: Scaffold(
             body: Container(
