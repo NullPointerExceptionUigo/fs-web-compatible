@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 // local imports
 import 'package:auto_study_management/attend_choice.dart';
 import 'package:auto_study_management/clock.dart' as clock;
+import 'package:auto_study_management/write_log.dart';
+
 
 String studNum = "";
 
@@ -135,7 +137,7 @@ class HomeState extends State<Home> {
                             Padding(
                               padding: const EdgeInsets.only(left: 10),
                               child: FilledButton(
-                                onPressed: () {send(studNum, attendedType);},
+                                onPressed: () {send(studNum, attendedType);  WriteLog().writeLog("$studNum ${attendedType.toString().substring(11)}"); setState(() {studNum = "";});},
                                 child: const Icon(Icons.send, size: 16,),
                               ),
                             )
