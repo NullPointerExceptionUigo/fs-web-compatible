@@ -3,10 +3,11 @@ import 'package:path_provider/path_provider.dart';
 
 class WriteLog{
 
+  late File file;
   void writeLog(String info)
   {
     final now = DateTime.now();
-    final log = '${now.month}-${now.day} ${now.hour}:${now.minute}:${now.second} -- $info';
+    final log = '${now.month}월${now.day}일 ${now.hour}:${now.minute}:${now.second} -- $info';
     write(log);
   }
   Future<String> get documentPath async {

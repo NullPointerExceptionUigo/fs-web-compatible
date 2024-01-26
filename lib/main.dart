@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'dart:core';
 
+import 'package:auto_study_management/show_log.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -26,12 +27,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        home: Scaffold(
-            appBar: clock.Clock(),
-            body: Home()
-            )
-        );
+    return MaterialApp(
+      initialRoute: '/home',
+        routes: {
+          '/home': (context) => const Home(),
+          '/log': (context) => const LogPage()
+        },
+        home: const Scaffold(
+            body: Home(),
+
+        ));
   }
 }
 
@@ -117,6 +122,10 @@ class HomeState extends State<Home> {
     
     return MaterialApp(
         home: Scaffold(
+            appBar: clock.Clock(),
+            floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/log');}),
             body: Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Column(
